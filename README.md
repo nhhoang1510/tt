@@ -30,7 +30,7 @@ Nhiệm vụ cụ thể của từng thành viên:
 | Nguyễn Huy Hoàng | Cài đặt lệnh ngoại trú và xử lý wildcards (?, *) |
 | Nguyễn Minh Đức | Triển khai cơ chế pipe và redirection |
 | Lương Trọng Hưởng | Phát triển tính năng thực thi tiến trình nền |
-| Nguyễn Quang Tháng | Xử lý và phân tích cú pháp các loại dấu ngoặc |
+| Nguyễn Quang Thắng | Xử lý và phân tích cú pháp các loại dấu ngoặc |
 | Trần Phú Ninh | Cài đặt và tối ưu hóa các lệnh nội trú |
 
 ## 4. HƯỚNG DẪN BIÊN DỊCH VÀ THỰC THI
