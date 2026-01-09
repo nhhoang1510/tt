@@ -1,105 +1,162 @@
 # XÂY DỰNG ỨNG DỤNG SHELL (TƯƠNG TỰ BASH)
-## 1. Giới thiệu chung và chức năng
-- Mục tiêu: Xây dựng một chương trình shell đơn giản bằng ngôn ngữ C.
-- Các chức năng chính:
-    + Thực thi một số lệnh nội trú và ngoại trú
-    + Xử lý pipe (|) và redirection (>)
-    + Cho phép chạy lệnh nền bằng &
-    + Xử lý ngoặc '..', "..", `..`, ... và wildcards(?*)
 
-## 2. Đánh giá mức độ hoàn thiện
-- Thực hiện tốt các một số lệnh cơ bản: lệnh nội trú (cd, exit, help...) và lệnh ngoại trú (ls, cat, grep...)
-- Xử lý đúng các ký tự đặc biệt: Pipe (|), chuyển hướng (>, >>, <) và Wildcards (*, ?)
-- Đã xử lý chạy tiến trình nền (&)
-## 3. Phân công nhiệm vụ:
-- Nguyễn Huy Hoàng: cho phép cài đặt lệnh ngoại trú và xử lý wildcards (?*) 
-- Nguyễn Minh Đức: Xử lý pipe và redirection
-- Lương Trọng Hưởng: Cho phép chạy lệnh nền bằng &
-- Nguyễn Quang Tháng: Xử lý các dấu ngoặc
-- Trần Phú Ninh: Cho phép cài đặt và thực thi một số lệnh nội trú
+## 1. TỔNG QUAN DỰ ÁN
 
-## 4. Hướng dẫn cài đặt, dịch và sử dụng:
-### Compile:
+### 1.1. Mục tiêu nghiên cứu
+Dự án nhằm thiết kế và triển khai một chương trình shell đơn giản sử dụng ngôn ngữ lập trình C, mô phỏng các chức năng cơ bản của Bash shell trong hệ điều hành Unix/Linux.
+
+### 1.2. Phạm vi chức năng
+Hệ thống shell được phát triển với các khả năng sau:
+
+- Thực thi lệnh nội trú (built-in commands) và lệnh ngoại trú (external commands)
+- Xử lý cơ chế đường ống (pipe) và chuyển hướng luồng dữ liệu (redirection)
+- Hỗ trợ thực thi tiến trình nền (background process execution)
+- Phân tích cú pháp các ký tự đặc biệt: dấu ngoặc đơn, ngoặc kép, backtick và wildcards
+
+## 2. ĐÁNH GIÁ KẾT QUẢ TRIỂN KHAI
+
+Hệ thống đã đạt được các mức độ hoàn thiện như sau:
+
+- **Thực thi lệnh**: Triển khai thành công cả lệnh nội trú (cd, exit, help, etc.) và lệnh ngoại trú (ls, cat, grep, etc.)
+- **Xử lý ký tự đặc biệt**: Phân tích cú pháp chính xác các toán tử pipe (|), chuyển hướng (>, >>, <) và wildcards (*, ?)
+- **Quản lý tiến trình**: Cài đặt hoàn chỉnh cơ chế thực thi tiến trình nền sử dụng toán tử ampersand (&)
+
+## 3. PHÂN CÔNG TRÁCH NHIỆM
+
+Dự án được thực hiện bởi nhóm nghiên cứu gồm 5 thành viên với phân công cụ thể:
+
+| Thành viên | Nhiệm vụ chính |
+|------------|----------------|
+| Nguyễn Huy Hoàng | Cài đặt lệnh ngoại trú và xử lý wildcards (?, *) |
+| Nguyễn Minh Đức | Triển khai cơ chế pipe và redirection |
+| Lương Trọng Hưởng | Phát triển tính năng thực thi tiến trình nền |
+| Nguyễn Quang Tháng | Xử lý và phân tích cú pháp các loại dấu ngoặc |
+| Trần Phú Ninh | Cài đặt và tối ưu hóa các lệnh nội trú |
+
+## 4. HƯỚNG DẪN BIÊN DỊCH VÀ THỰC THI
+
+### 4.1. Biên dịch chương trình
 ```bash
 make
 ```
-### Run:
+
+### 4.2. Khởi chạy ứng dụng
 ```bash
-run
+./run
 ```
 
-## 5. Các lệnh nội trú
-- pwd: folder đang ở hiện tại
-- cd: chuyển sang folder khác
-- echo: dùng để in (hiển thị) một chuỗi ký tự hoặc giá trị ra màn hình
-- export: dùng để đưa biến shell thành biến môi trường
-- unset: dùng để xóa biến (biến shell hoặc biến môi trường) ra khỏi shell hiện tại
-- jobs: dùng để liệt kê các tiến trình đang chạy nền (background jobs) trong shell hiện tại
-- set: để thiết lập, hiển thị hoặc thay đổi trạng thái và biến của shell
-- kill: dùng để gửi tín hiệu (signal) tới process hoặc job để điều khiển hoặc kết thúc nó
+## 5. TẬP LỆNH NỘI TRÚ (BUILT-IN COMMANDS)
 
-## 6. Các lệnh ngoại trú 
-- ls: liệt kê folder
-- ate: in ra ngày tháng năm hiện tại
-- time: in ra giờ hiện tại
-- whoami: dùng để hiển thị tên người dùng (username) hiện đang đăng nhập và đang chạy shell
-- sleep: dùng để tạm dừng (ngủ) tiến trình trong một khoảng thời gian xác định, sau đó tiếp tục hoặc kết thúc
-- cat: dùng để hiển thị nội dung file ra màn hình, hoặc nối nhiều file lại với nhau
-- wc: dùng để đếm số dòng, số từ và số ký tự (byte) của file hoặc dữ liệu đầu vào
+Các lệnh nội trú được tích hợp trực tiếp vào shell:
 
-## 7. Pipe
-Pipe là cơ chế nối đầu ra của lệnh này vào đầu vào của lệnh khác
+- **pwd**: Hiển thị đường dẫn tuyệt đối của thư mục làm việc hiện tại
+- **cd**: Thay đổi thư mục làm việc (change directory)
+- **echo**: Xuất chuỗi ký tự hoặc giá trị biến ra luồng đầu ra chuẩn
+- **export**: Chuyển đổi biến shell thành biến môi trường toàn cục
+- **unset**: Gỡ bỏ biến shell hoặc biến môi trường khỏi không gian tên hiện tại
+- **jobs**: Liệt kê danh sách các tiến trình đang thực thi ở chế độ nền
+- **set**: Cấu hình và quản lý các tùy chọn cũng như biến của shell
+- **kill**: Gửi tín hiệu điều khiển (signal) đến tiến trình hoặc job để quản lý vòng đời
 
+## 6. TẬP LỆNH NGOẠI TRÚ (EXTERNAL COMMANDS)
 
-Cách dùng 
+Các lệnh ngoại trú được thực thi thông qua việc tạo tiến trình con:
 
- ```bash
-ls | wc -l :  Đếm số dòng trong output của ls → thường được hiểu là đếm số file/thư mục trong thư mục hiện tại.
+- **ls**: Liệt kê nội dung thư mục
+- **date**: Hiển thị ngày tháng hệ thống hiện tại
+- **time**: Hiển thị thời gian hệ thống hiện tại
+- **whoami**: Trả về tên người dùng đang thực thi shell
+- **sleep**: Tạm dừng tiến trình trong khoảng thời gian xác định (đơn vị: giây)
+- **cat**: Đọc và xuất nội dung file ra đầu ra chuẩn, hỗ trợ nối nhiều file
+- **wc**: Thống kê số dòng, số từ và số byte của file hoặc luồng đầu vào
 
-ls *.txt > list.txt: Liệt kê tất cả các file có đuôi .txt trong thư mục hiện tại và ghi danh sách đó vào file list.txt (ghi đè nội dung cũ nếu có).
+## 7. CƠ CHẾ ĐƯỜNG ỐNG (PIPE)
 
-ls *.txt | wc -l: Đếm số lượng file có đuôi .txt trong thư mục hiện tại.
-```
+### 7.1. Định nghĩa
+Pipe là cơ chế Inter-Process Communication (IPC) cho phép kết nối luồng đầu ra chuẩn (stdout) của tiến trình nguồn với luồng đầu vào chuẩn (stdin) của tiến trình đích.
 
-## 8. Redirection
-Redirection (chuyển hướng) trong shell là cơ chế điều hướng luồng vào/ra của chương trình, thay vì dùng bàn phím và màn hình mặc định.
-
-1. Chuyển hướng output >
-```bash
-ls > out.txt: chuyển (redirect) toàn bộ kết quả của lệnh ls vào file out.txt
-```
-
-2. Ghi thêm >>
+### 7.2. Cú pháp và ví dụ minh họa
 
 ```bash
-ls >> out.txt: Ghi toàn bộ kết quả của lệnh ls vào cuối file
- 
+# Đếm số lượng mục trong thư mục hiện tại
+ls | wc -l
+
+# Kết hợp wildcard với pipe để đếm file theo pattern
+ls *.txt | wc -l
+
+# Xử lý dữ liệu đầu ra trước khi lưu file
+ls *.txt > list.txt
 ```
 
-## 9. Dấu ngoặc và wildcards
-1. Dấu ngoặc đơn ('...')
-Dùng để bảo toàn nguyên vẹn chuỗi ký tự (Literal String). Shell sẽ không xử lý biến hay ký tự đặc biệt bên trong.
-```Bash
+## 8. CƠ CHẾ CHUYỂN HƯỚNG (REDIRECTION)
 
+### 8.1. Khái niệm
+Redirection là kỹ thuật điều hướng luồng dữ liệu vào/ra của tiến trình, cho phép thay thế các file descriptor mặc định (stdin, stdout, stderr).
+
+### 8.2. Các toán tử chuyển hướng
+
+#### 8.2.1. Chuyển hướng đầu ra với ghi đè (>)
+```bash
+# Ghi đầu ra của lệnh vào file (truncate mode)
+ls > output.txt
+```
+
+#### 8.2.2. Chuyển hướng đầu ra với ghi thêm (>>)
+```bash
+# Nối đầu ra vào cuối file (append mode)
+ls >> output.txt
+```
+
+#### 8.2.3. Chuyển hướng đầu vào (<)
+```bash
+# Đọc đầu vào từ file
+wc -l < input.txt
+```
+
+## 9. XỬ LÝ KÝ TỰ ĐẶC BIỆT
+
+### 9.1. Dấu ngoặc đơn ('...')
+**Chức năng**: Bảo toàn chuỗi ký tự nguyên gốc (literal string), vô hiệu hóa mọi phép thay thế và mở rộng.
+
+```bash
 echo '$HOME'
+# Output: $HOME
 ```
-2. Dấu ngoặc kép ("...")
-Dùng để nhóm chuỗi ký tự. Shell cho phép thay thế biến ($) nhưng bỏ qua các ký tự đại diện (*, ?).
-```Bash
-echo "Xin chao $NAME"
+
+### 9.2. Dấu ngoặc kép ("...")
+**Chức năng**: Nhóm chuỗi ký tự với phép thay thế biến, nhưng vô hiệu hóa wildcard expansion.
+
+```bash
+echo "Xin chào $USER"
+# Output: Xin chào [tên người dùng]
 ```
-3. Dấu Backtick (`...`)
-Dùng để thực thi lệnh bên trong và lấy kết quả trả về (Command Substitution).
-```Bash
+
+### 9.3. Dấu Backtick (`...`)
+**Chức năng**: Thực thi lệnh bên trong và thay thế bằng kết quả trả về (command substitution).
+
+```bash
 echo `pwd`
+# Output: /đường/dẫn/thư/mục/hiện/tại
 ```
-4. Wildcards (Ký tự đại diện)
-Dùng để so khớp tên file/thư mục tự động.
-Dấu sao (*): Khớp với một chuỗi ký tự bất kỳ (độ dài >= 0).
-```Bash
+
+### 9.4. Ký tự đại diện (Wildcards)
+
+#### 9.4.1. Dấu sao (*)
+Khớp với chuỗi ký tự có độ dài tùy ý (≥ 0 ký tự).
+
+```bash
 ls *.c
+# Liệt kê tất cả file có phần mở rộng .c
 ```
-Dấu hỏi chấm (?): Khớp với đúng một ký tự bất kỳ.
-```Bash
+
+#### 9.4.2. Dấu hỏi (?)
+Khớp với đúng một ký tự bất kỳ.
+
+```bash
 ls test?.txt
+# Khớp với: test1.txt, testA.txt, etc.
 ```
+
+## 10. KẾT LUẬN
+
+Dự án đã thành công trong việc triển khai một shell đơn giản với đầy đủ các chức năng cơ bản, đáp ứng được yêu cầu về xử lý lệnh, quản lý tiến trình và phân tích cú pháp. Hệ thống có thể được mở rộng thêm các tính năng nâng cao như job control, history management và script execution trong các phiên bản tiếp theo.
