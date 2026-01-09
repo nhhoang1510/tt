@@ -1,4 +1,4 @@
-# BUILDING A SHELL-LIKE BASH
+# XÂY DỰNG ỨNG DỤNG SHELL (TƯƠNG TỰ BASH)
 ## 1. Giới thiệu chung và chức năng
 - Mục tiêu: Xây dựng một chương trình shell đơn giản bằng ngôn ngữ C.
 - Các chức năng chính:
@@ -8,13 +8,15 @@
     + Xử lý ngoặc '..', "..", `..`, ... và wildcards(?*)
 
 ## 2. Đánh giá mức độ hoàn thiện
-
+- Thực hiện tốt các một số lệnh cơ bản: lệnh nội trú (cd, exit, help...) và lệnh ngoại trú (ls, cat, grep...)
+- Xử lý đúng các ký tự đặc biệt: Pipe (|), chuyển hướng (>, >>, <) và Wildcards (*, ?)
+- Đã xử lý chạy tiến trình nền (&)
 ## 3. Phân công nhiệm vụ:
-- Trần Phú Ninh:
-- Nguyễn Huy Hoàng: 
-- Lương Trọng Hưởng: 
-- Nguyễn Minh Đức:
-- Nguyễn Quang Thắng:
+- Nguyễn Huy Hoàng: cho phép cài đặt lệnh ngoại trú và xử lý wildcards (?*) 
+- Nguyễn Minh Đức: Xử lý pipe và redirection
+- Lương Trọng Hưởng: Cho phép chạy lệnh nền bằng &
+- Nguyễn Quang Tháng: Xử lý các dấu ngoặc
+- Trần Phú Ninh: Cho phép cài đặt và thực thi một số lệnh nội trú
 
 ## 4. Hướng dẫn cài đặt, dịch và sử dụng:
 ### Compile:
@@ -26,30 +28,30 @@ make
 run
 ```
 
-## 5. Các lệnh nối trú
-1. pwd: Folder đang ở hiện tại
-3. cd: Chuyển sang folder khác
-4. echo: dùng để in (hiển thị) một chuỗi ký tự hoặc giá trị ra màn hình
-5. export: dùng để đưa biến shell thành biến môi trường
-6. unset: dùng để xóa biến (biến shell hoặc biến môi trường) ra khỏi shell hiện tại
-7. jobs: dùng để liệt kê các tiến trình đang chạy nền (background jobs) trong shell hiện tại
-8. set: để thiết lập, hiển thị hoặc thay đổi trạng thái và biến của shell
-9. kill: dùng để gửi tín hiệu (signal) tới process hoặc job để điều khiển hoặc kết thúc nó
+## 5. Các lệnh nội trú
+- pwd: folder đang ở hiện tại
+- cd: chuyển sang folder khác
+- echo: dùng để in (hiển thị) một chuỗi ký tự hoặc giá trị ra màn hình
+- export: dùng để đưa biến shell thành biến môi trường
+- unset: dùng để xóa biến (biến shell hoặc biến môi trường) ra khỏi shell hiện tại
+- jobs: dùng để liệt kê các tiến trình đang chạy nền (background jobs) trong shell hiện tại
+- set: để thiết lập, hiển thị hoặc thay đổi trạng thái và biến của shell
+- kill: dùng để gửi tín hiệu (signal) tới process hoặc job để điều khiển hoặc kết thúc nó
 
 ## 6. Các lệnh ngoại trú 
-1. ls: Liệt kê folder
-2. date: In ra ngày tháng năm hiện tại
-3. time: In ra giờ hiện tại
-4. whoami: dùng để hiển thị tên người dùng (username) hiện đang đăng nhập và đang chạy shell
-5. sleep: dùng để tạm dừng (ngủ) tiến trình trong một khoảng thời gian xác định, sau đó tiếp tục hoặc kết thúc
-6. cat: dùng để hiển thị nội dung file ra màn hình, hoặc nối nhiều file lại với nhau
-7. wc: dùng để đếm số dòng, số từ và số ký tự (byte) của file hoặc dữ liệu đầu vào
+- ls: liệt kê folder
+- ate: in ra ngày tháng năm hiện tại
+- time: in ra giờ hiện tại
+- whoami: dùng để hiển thị tên người dùng (username) hiện đang đăng nhập và đang chạy shell
+- sleep: dùng để tạm dừng (ngủ) tiến trình trong một khoảng thời gian xác định, sau đó tiếp tục hoặc kết thúc
+- cat: dùng để hiển thị nội dung file ra màn hình, hoặc nối nhiều file lại với nhau
+- wc: dùng để đếm số dòng, số từ và số ký tự (byte) của file hoặc dữ liệu đầu vào
 
 ## 7. Pipe
 Pipe là cơ chế nối đầu ra của lệnh này vào đầu vào của lệnh khác
 
 
- Cách dùng 
+Cách dùng 
 
  ```bash
 ls | wc -l :  Đếm số dòng trong output của ls → thường được hiểu là đếm số file/thư mục trong thư mục hiện tại.
