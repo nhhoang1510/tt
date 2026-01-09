@@ -1,29 +1,29 @@
 # XÂY DỰNG ỨNG DỤNG SHELL (TƯƠNG TỰ BASH)
 
-## 1. TỔNG QUAN DỰ ÁN
+## 1. GIỚI THIỆU CHUNG
 
-### 1.1. Mục tiêu nghiên cứu
-Dự án nhằm thiết kế và triển khai một chương trình shell đơn giản sử dụng ngôn ngữ lập trình C, mô phỏng các chức năng cơ bản của Bash shell trong hệ điều hành Unix/Linux.
+### 1.1. Mục tiêu 
+Xay dựng một chương trình shell đơn giản bằng ngôn ngữ C thực hiện một số chức năng
 
-### 1.2. Phạm vi chức năng
+### 1.2. Các chức năng chính
 Hệ thống shell được phát triển với các khả năng sau:
 
 - Thực thi lệnh nội trú (built-in commands) và lệnh ngoại trú (external commands)
 - Xử lý cơ chế đường ống (pipe) và chuyển hướng luồng dữ liệu (redirection)
 - Hỗ trợ thực thi tiến trình nền (background process execution)
-- Phân tích cú pháp các ký tự đặc biệt: dấu ngoặc đơn, ngoặc kép, backtick và wildcards
+- Phân tích cú pháp các ký tự đặc biệt: dấu ngoặc đơn ('..'), ngoặc kép (".."), backtick(`..`) và wildcards (?*)
 
-## 2. ĐÁNH GIÁ KẾT QUẢ TRIỂN KHAI
+## 2. ĐÁNH GIÁ MỨC ĐỘ HOÀN THIỆN
 
 Hệ thống đã đạt được các mức độ hoàn thiện như sau:
 
-- **Thực thi lệnh**: Triển khai thành công cả lệnh nội trú (cd, exit, help, etc.) và lệnh ngoại trú (ls, cat, grep, etc.)
+- **Thực thi lệnh**: Chạy thành công 1 số lệnh cơ bản như lệnh nội trú (cd, exit, help, ...) và lệnh ngoại trú (ls, cat, grep, ...)
 - **Xử lý ký tự đặc biệt**: Phân tích cú pháp chính xác các toán tử pipe (|), chuyển hướng (>, >>, <) và wildcards (*, ?)
 - **Quản lý tiến trình**: Cài đặt hoàn chỉnh cơ chế thực thi tiến trình nền sử dụng toán tử ampersand (&)
 
-## 3. PHÂN CÔNG TRÁCH NHIỆM
+## 3. PHÂN CÔNG NHIỆM VỤ
 
-Dự án được thực hiện bởi nhóm nghiên cứu gồm 5 thành viên với phân công cụ thể:
+Nhiệm vụ cụ thể của từng thành viên:
 
 | Thành viên | Nhiệm vụ chính |
 |------------|----------------|
@@ -42,14 +42,14 @@ make
 
 ### 4.2. Khởi chạy ứng dụng
 ```bash
-./run
+./test
 ```
 
-## 5. TẬP LỆNH NỘI TRÚ (BUILT-IN COMMANDS)
+## 5. LỆNH NỘI TRÚ (BUILT-IN COMMANDS)
 
 Các lệnh nội trú được tích hợp trực tiếp vào shell:
 
-- **pwd**: Hiển thị đường dẫn tuyệt đối của thư mục làm việc hiện tại
+- **pwd**: Hiển thị đường dẫn của thư mục làm việc hiện tại
 - **cd**: Thay đổi thư mục làm việc (change directory)
 - **echo**: Xuất chuỗi ký tự hoặc giá trị biến ra luồng đầu ra chuẩn
 - **export**: Chuyển đổi biến shell thành biến môi trường toàn cục
@@ -58,7 +58,7 @@ Các lệnh nội trú được tích hợp trực tiếp vào shell:
 - **set**: Cấu hình và quản lý các tùy chọn cũng như biến của shell
 - **kill**: Gửi tín hiệu điều khiển (signal) đến tiến trình hoặc job để quản lý vòng đời
 
-## 6. TẬP LỆNH NGOẠI TRÚ (EXTERNAL COMMANDS)
+## 6. LỆNH NGOẠI TRÚ (EXTERNAL COMMANDS)
 
 Các lệnh ngoại trú được thực thi thông qua việc tạo tiến trình con:
 
@@ -156,7 +156,3 @@ Khớp với đúng một ký tự bất kỳ.
 ls test?.txt
 # Khớp với: test1.txt, testA.txt, etc.
 ```
-
-## 10. KẾT LUẬN
-
-Dự án đã thành công trong việc triển khai một shell đơn giản với đầy đủ các chức năng cơ bản, đáp ứng được yêu cầu về xử lý lệnh, quản lý tiến trình và phân tích cú pháp. Hệ thống có thể được mở rộng thêm các tính năng nâng cao như job control, history management và script execution trong các phiên bản tiếp theo.
