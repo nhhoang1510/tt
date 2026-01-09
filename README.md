@@ -17,6 +17,13 @@
 - Nguyễn Quang Thắng:
 
 ## 4. Hướng dẫn cài đặt, dịch và sử dụng:
-- Bước 1: 
+### Bước 1: Compile
+```bash
+make
+```
+### Bước 2: Run
+```bash
+run
+```
 
 ## 5.
